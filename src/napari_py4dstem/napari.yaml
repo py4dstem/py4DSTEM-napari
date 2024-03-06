@@ -1,0 +1,41 @@
+name: napari-py4dstem
+display_name: py4DSTEM
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/manifest.html for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: napari-py4dstem.get_reader
+      python_name: napari_py4dstem._reader:napari_get_reader
+      title: Open data with py4DSTEM
+    - id: napari-py4dstem.write_multiple
+      python_name: napari_py4dstem._writer:write_multiple
+      title: Save multi-layer data with py4DSTEM
+    - id: napari-py4dstem.write_single_image
+      python_name: napari_py4dstem._writer:write_single_image
+      title: Save image data with py4DSTEM
+    - id: napari-py4dstem.make_sample_data
+      python_name: napari_py4dstem._sample_data:make_sample_data
+      title: Load sample data from py4DSTEM
+    - id: napari-py4dstem.make_qwidget
+      python_name: napari_py4dstem:py4DSTEM
+      title: Make py4DSTEM plugin
+  readers:
+    - command: napari-py4dstem.get_reader
+      accepts_directories: false
+      filename_patterns: ['*.npy', "*.h5", "*.hdf5", "*.py4dstem", "*.emd"]
+  writers:
+    - command: napari-py4dstem.write_multiple
+      layer_types: ['image*','labels*']
+      filename_extensions: []
+    - command: napari-py4dstem.write_single_image
+      layer_types: ['image']
+      filename_extensions: ['.npy']
+  sample_data:
+    - command: napari-py4dstem.make_sample_data
+      display_name: py4DSTEM
+      key: unique_id.1
+  widgets:
+    - command: napari-py4dstem.make_qwidget
+      display_name: py4DSTEM
